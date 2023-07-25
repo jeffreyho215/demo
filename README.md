@@ -54,55 +54,55 @@ Method (Assembling the data and cleaning)
 
 
 First, I scraped from the hoopshype site by seeking the table in the html codes through the BeautifulSoup (image shown below)
-![Alt text](/repository/assets/BeautifulSoup_scrape.png?raw=true "BeautifulSoup")
+![Alt text](/BeautifulSoup_scrape.png?raw=true "BeautifulSoup")
 Then I seeked all <td> sections in the source codes and discarded any lines of codes that are not player names or salaries by locating the 
 9th line of the <td> section to the 3008th. From the 9th line, scrape the names, then after 8 lines, scrape the 17th for another name; same
 principle for the salaries. This goes on from 2015 to 2022 data. The data are then listed in 2 lists (image shown below).
-![Alt text](/repository/assets/<td>_find_the_names_and_salaries.png?raw=true  "names and salaries")
+![Alt text](/<td>_find_the_names_and_salaries.png?raw=true  "names and salaries")
 
 
 Dictionaries for the names and salaries are created, then a dataframe (salary_df) is created from the dictionaries. Total of 8 dataframes are
 built for the 8 periods examined (image shown below)
-![Alt text](/repository/assets/dictionaries_and_dataframes.png?raw=true  "dict and df")
+![Alt text](/dictionaries_and_dataframes.png?raw=true  "dict and df")
 
 Dollar signs and commas are removed from the dataframe. The salary columns are transformed into float 64s from strings for calculations. (image shown below)
-![Alt text](/repository/assets/dollar_and_comma.png?raw=true  "dollar and comma")
+![Alt text](/dollar_and_comma.png?raw=true  "dollar and comma")
 
 Then I scraped from wikipedia to use the abbreviations of the teams. BeautifulSoup is again used, same princple as scraping from hoopshype.
 Dataframe is built. The dataframe is rearranged into ascending order (first letter of each abbreviation). The index column is dropped.
-![Alt text](/repository/assets/abbreviation.png?raw=true  "abbreviation")
+![Alt text](/abbreviation.png?raw=true  "abbreviation")
 
 Here I used the data from ESPN to first build a dataframe (stats_df) housing the player names. Then I removed the rows with TOT since it refers to the 'TOTal'
 of all metrics measuring the players listed in the data. Then I matched the abbreviations dataframe with the current dataframe to match the full 
 team names with abbreviations. For the salaries, I merge dataframe salary_df (for 2021-22) with stats_df (for 2021-22). Data cleaning follows.The
 Franchise rows that have no value are removed. Then player names and index columns are dropped. And the salaries are rearranged with groupby(), then
 added together according to the Franchise values. This repeats separately for the 8 periods.
-![Alt text](/repository/assets/match_dfs_abbreviation.png?raw=true  "match_dfs_abbreviation")
+![Alt text](/match_dfs_abbreviation.png?raw=true  "match_dfs_abbreviation")
 
 The 8 periods salary dfs are merged everytime the process described in the previous paragraph for each new period
 is completed. The name of this dataframe is 'new'. The method used to merge is outer, or using the Franchise column to merge the 2 
 dataframes, even if there are empty or different valued cells in this column
-![Alt text](/repository/assets/salary_df_merge.png?raw=true  "salary_df_merge")
+![Alt text](/salary_df_merge.png?raw=true  "salary_df_merge")
 
 Following this step, I scrape from the ESPN site for the W/L ratio. The process is the same as scraping from hoopshype. 8 dataframes
 for each of the 8 periods. 
-![Alt text](/repository/assets/W/L_ratio.png?raw=true  "W/L_ratio")
+![Alt text](/W/L_ratio.png?raw=true  "W/L_ratio")
 
 I then merged these W/L ratio dataframes into one, using the inner method, or using Franchise column to merge, and drop the rows that
 have no values or different values in the Franchise cell. The end-dataframe is named dfyear6
-![Alt text](/repository/assets/merging_the_W/L_ratio.png?raw=true  "merging_the_W/L_ratio")
+![Alt text](/merging_the_W/L_ratio.png?raw=true  "merging_the_W/L_ratio")
 
 The final dataframe is built by merging the salary dataframe (new6), with W/L ratio dataframe (dfyear6) with the inner method.
 Franchise column is set as the index column.  Then correlations are calculated for each period's total salary of each team
 with the W/L ratio of each team. 
-![Alt text](/repository/assets/Ending_dataframe.png?raw=true  "Ending_dataframe")
+![Alt text](/Ending_dataframe.png?raw=true  "Ending_dataframe")
 
 A list of correlations is built, with another list of years constructed. Correlations are rounded to 3 decimals, and plotted as 
 a line chart. 
-![Alt text](/repository/assets/Plotting.png?raw=true "Plotting")
+![Alt text](/Plotting.png?raw=true "Plotting")
 
 The resulting chart
-![Alt text](/repository/assets/Chart.png?raw=true "Chart")
+![Alt text](/Chart.png?raw=true "Chart")
 
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------
