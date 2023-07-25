@@ -6,6 +6,8 @@ Moreover, without visualizing the data, they are nothing but pointless dots on t
 for a marketer to succinctly and clearly demonstrate the results through charts so that a message can be relayed with no problem.
 
 This project represents my effort to achieve this goal. The following will explain the projects goal, the methods, and the results.
+
+
 ------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
